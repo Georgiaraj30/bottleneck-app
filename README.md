@@ -23,3 +23,6 @@ Technologies
 - Streamlit
 - Google Colab
 
+Live Demo
+
+Open the Streamlit Dashboard-(https://bottleneck-app-nbruxgom4djus7xrkbf366.streamlit.app/)
