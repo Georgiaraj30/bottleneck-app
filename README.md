@@ -23,9 +23,3 @@ Technologies
 - Streamlit
 - Google Colab
 
-Files
-ML_PROJECT.ipynb       # ML code and results
-app.py                 # Streamlit application
-bottleneck_model.pkl   # Trained model
-feature_means.pkl      # Feature baseline values
-requirements.txt       # Dependencies
