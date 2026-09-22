@@ -1,0 +1,5 @@
+outs:
+- md5: a4888cce23917430e746a58673efbe4c
+  size: 176933788
+  hash: md5
+  path: network.csv
