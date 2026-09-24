@@ -1,4 +1,4 @@
-Proactive Detection of IT System Bottlenecks Using Machine Learning and MLOps
+Detection of IT System Bottlenecks Using Machine Learning and MLOps
 
 ## About
 
