@@ -1,5 +1,9 @@
 from preprocess import preprocess_data
-from train import train_model
+
+from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import RandomForestClassifier
+from xgboost import XGBClassifier
+
 from sklearn.metrics import (
     accuracy_score,
     confusion_matrix,
@@ -7,36 +11,69 @@ from sklearn.metrics import (
 )
 
 
-def evaluate_model():
+def evaluate_models():
 
     # Get preprocessed data
     X_train, X_test, y_train, y_test, X, y = preprocess_data()
 
-    # Train/load the model
-    model = train_model()
+    # Define the three models
+    models = {
 
-    # Make predictions
-    y_pred = model.predict(X_test)
+        "Logistic Regression": LogisticRegression(
+            max_iter=1000
+        ),
 
-    # Calculate accuracy
-    accuracy = accuracy_score(y_test, y_pred)
+        "Random Forest": RandomForestClassifier(
+            n_estimators=100,
+            random_state=42
+        ),
 
-    # Confusion matrix
-    cm = confusion_matrix(y_test, y_pred)
+        "XGBoost": XGBClassifier(
+            n_estimators=100,
+            max_depth=6,
+            learning_rate=0.1,
+            random_state=42,
+            eval_metric="logloss"
+        )
+    }
 
-    # Classification report
-    report = classification_report(y_test, y_pred)
+    print("\n========================================")
+    print("MODEL EVALUATION")
+    print("========================================")
 
-    print("\nModel Evaluation")
-    print("----------------")
-    print("Accuracy:", accuracy)
+    # Evaluate each model
+    for name, model in models.items():
 
-    print("\nConfusion Matrix:")
-    print(cm)
+        print(f"\n{name}")
+        print("-" * len(name))
 
-    print("\nClassification Report:")
-    print(report)
+        # Train model
+        model.fit(X_train, y_train)
+
+        # Predictions
+        y_pred = model.predict(X_test)
+
+        # Accuracy
+        accuracy = accuracy_score(y_test, y_pred)
+
+        # Confusion matrix
+        cm = confusion_matrix(y_test, y_pred)
+
+        # Classification report
+        report = classification_report(y_test, y_pred)
+
+        print("Accuracy:", accuracy)
+
+        print("\nConfusion Matrix:")
+        print(cm)
+
+        print("\nClassification Report:")
+        print(report)
+
+    print("\n========================================")
+    print("All 3 models evaluated successfully!")
+    print("========================================")
 
 
 if __name__ == "__main__":
-    evaluate_model()
+    evaluate_models()
